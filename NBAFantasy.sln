@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1A3A9290-F900-40EE-B0F9-8C1A10273B4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5785BED8-3E49-4FEE-AEEC-146E03857AC5}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NBAFantasy", "src\ProductsAppTut\NBAFantasy.xproj", "{C975A8E4-145E-4DAB-AE7A-D314972A9229}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C975A8E4-145E-4DAB-AE7A-D314972A9229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C975A8E4-145E-4DAB-AE7A-D314972A9229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C975A8E4-145E-4DAB-AE7A-D314972A9229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C975A8E4-145E-4DAB-AE7A-D314972A9229}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C975A8E4-145E-4DAB-AE7A-D314972A9229} = {1A3A9290-F900-40EE-B0F9-8C1A10273B4F}
+	EndGlobalSection
+EndGlobal
