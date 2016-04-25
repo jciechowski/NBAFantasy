@@ -41,10 +41,10 @@ namespace Front.Models
             return documents.Select(bsonDocument => BsonSerializer.Deserialize<Players>(bsonDocument)).ToArray();
         }
 
-        public Players GetByName(string name)
+        public Players FindById(string id)
         {
-            var filter = Builders<BsonDocument>.Filter.Regex("Name", new BsonRegularExpression(name));
-            var document = _collection.Find(filter).First();
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            var document = _collection.Find(filter).FirstOrDefault();
             return BsonSerializer.Deserialize<Players>(document);
         }
 
@@ -53,10 +53,11 @@ namespace Front.Models
             throw new NotImplementedException();
         }
 
-
-        public void Update(Players player)
+        public void Update(string id)
         {
-            throw new NotImplementedException();
+            var player = FindById(id);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", player.Id);
+            _collection.ReplaceOne(filter, BsonDocument.Parse(player.ToJson()));
         }
 
     }

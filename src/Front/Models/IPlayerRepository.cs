@@ -7,11 +7,11 @@ namespace Front.Models
     {
         IEnumerable<Players> GetAllPlayers();
 
-        Players GetByName(string name);
+        Players FindById(string name);
 
         void Add(Players players);
 
-        void Update(Players player);
+        void Update(string id);
 
         bool Remove(ObjectId id);
     }

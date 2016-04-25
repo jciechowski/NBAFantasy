@@ -19,28 +19,34 @@ namespace Front.Controllers
             return View(allPlayers);
         }
 
-        //[HttpGet]
         public IEnumerable<Players> GetAllPlayers()
         {
             return _playerRepository.GetAllPlayers();
         }
 
-        //[HttpGet("{Name}", Name = "GetPlayer")]
-        public IActionResult GetPlayer()
-        {
-            var name = "Avery";
-            var player = _playerRepository.GetByName(name);
-            if (player == null)
-                return HttpNotFound();
-            ViewData["Player"] = player;
-            return new ObjectResult(player);
-        }
-
-        //[HttpPost]
         public void AddPlayer([FromBody] Players player)
         {
             if (player != null)
                 _playerRepository.Add(player);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            if (id == null)
+                return HttpNotFound();
+
+            var player = _playerRepository.FindById(id);
+            if (player == null)
+                return HttpNotFound();
+
+            return View(player);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Players player, string id)
+        {
+            _playerRepository.Update(id);
+            return View(player);
         }
 
     }
