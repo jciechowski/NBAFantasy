@@ -2,7 +2,7 @@
 @model Player
 
 @{
-    ViewData["Title"] = "Edit Player";
+    ViewData["Title"] = "Create Player";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,10 +10,6 @@
 
 @using (Html.BeginForm())
 {
-    <legend>Player</legend>
-
-    @Html.HiddenFor(model => model.Id)
-
     @Html.EditorForModel();
     <p>
         <input type="submit" value="Save" />

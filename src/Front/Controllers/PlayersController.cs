@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNet.Mvc;
-using MongoDB.Bson;
 using NBAFantasy.Models;
 
 namespace NBAFantasy.Controllers
@@ -16,19 +15,8 @@ namespace NBAFantasy.Controllers
 
         public IActionResult Index()
         {
-            var allPlayers = GetAllPlayers();
+            var allPlayers = _playerRepository.GetAllPlayers();
             return View(allPlayers);
-        }
-
-        public IEnumerable<Player> GetAllPlayers()
-        {
-            return _playerRepository.GetAllPlayers();
-        }
-
-        public void AddPlayer([FromBody] Player player)
-        {
-            if (player != null)
-                _playerRepository.Add(player);
         }
 
         public IActionResult Edit(string id)
@@ -54,6 +42,20 @@ namespace NBAFantasy.Controllers
         {
             _playerRepository.Remove(id);
             return RedirectToAction(("Index"));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Player player)
+        {
+            if (player == null)
+                return HttpNotFound();
+            _playerRepository.Create(player);
+            return View();
         }
     }
 }

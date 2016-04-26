@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace NBAFantasy.Models
 {
@@ -15,7 +13,7 @@ namespace NBAFantasy.Models
 
         Player FindById(string name);
 
-        void Add(Player player);
+        void Create(Player player);
 
         void Update(Player player, string id);
 
@@ -43,7 +41,7 @@ namespace NBAFantasy.Models
             _collection = Database.GetCollection<BsonDocument>(collection);
         }
 
-        public void Add(Player player)
+        public void Create(Player player)
         {
             var document = BsonDocument.Parse(player.ToJson());
             _collection.InsertOne(document);
@@ -76,6 +74,5 @@ namespace NBAFantasy.Models
             var filter = Builders<BsonDocument>.Filter.Eq("_id", player.Id);
             _collection.ReplaceOne(filter, BsonDocument.Parse(player.ToJson()));
         }
-
     }
 }
