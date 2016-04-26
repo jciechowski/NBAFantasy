@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Front.Models
+namespace NBAFantasy.Models
 {
     public class Player
     {

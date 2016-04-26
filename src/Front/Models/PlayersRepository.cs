@@ -1,13 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System.Linq;
+using MongoDB.Driver.Builders;
 
-namespace Front.Models
+namespace NBAFantasy.Models
 {
+    public interface IPlayerRepository
+    {
+        IEnumerable<Player> GetAllPlayers();
+
+        Player FindById(string name);
+
+        void Add(Player player);
+
+        void Update(Player player, string id);
+
+        void Remove(string id);
+    }
+
     public class PlayersRepository : IPlayerRepository
     {
         private IMongoCollection<BsonDocument> _collection;
@@ -48,10 +62,12 @@ namespace Front.Models
             return BsonSerializer.Deserialize<Player>(document);
         }
 
-        public bool Remove(ObjectId id)
+        public void Remove(string id)
         {
-            throw new NotImplementedException();
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            _collection.DeleteOne(filter);
         }
+
         //TODO
         // remove ID and fix passing player ID from Edit view
         public void Update(Player player, string id)

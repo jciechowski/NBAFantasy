@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Front.Models;
 using Microsoft.AspNet.Mvc;
+using MongoDB.Bson;
+using NBAFantasy.Models;
 
-namespace Front.Controllers
+namespace NBAFantasy.Controllers
 {
     public class PlayersController : Controller
     {
@@ -47,6 +48,12 @@ namespace Front.Controllers
         {
             _playerRepository.Update(player, id);
             return View(player);
+        }
+
+        public IActionResult Delete(string id)
+        {
+            _playerRepository.Remove(id);
+            return RedirectToAction(("Index"));
         }
     }
 }

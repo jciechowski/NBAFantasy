@@ -3,9 +3,9 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Front.Models;
+using NBAFantasy.Models;
 
-namespace Front
+namespace NBAFantasy
 {
     public class Startup
     {
