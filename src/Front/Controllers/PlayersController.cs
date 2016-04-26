@@ -19,12 +19,12 @@ namespace Front.Controllers
             return View(allPlayers);
         }
 
-        public IEnumerable<Players> GetAllPlayers()
+        public IEnumerable<Player> GetAllPlayers()
         {
             return _playerRepository.GetAllPlayers();
         }
 
-        public void AddPlayer([FromBody] Players player)
+        public void AddPlayer([FromBody] Player player)
         {
             if (player != null)
                 _playerRepository.Add(player);
@@ -43,11 +43,10 @@ namespace Front.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Players player, string id)
+        public IActionResult Edit(Player player, string id)
         {
-            _playerRepository.Update(id);
+            _playerRepository.Update(player, id);
             return View(player);
         }
-
     }
 }

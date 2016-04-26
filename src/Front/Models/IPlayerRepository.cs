@@ -5,13 +5,13 @@ namespace Front.Models
 {
     public interface IPlayerRepository
     {
-        IEnumerable<Players> GetAllPlayers();
+        IEnumerable<Player> GetAllPlayers();
 
-        Players FindById(string name);
+        Player FindById(string name);
 
-        void Add(Players players);
+        void Add(Player player);
 
-        void Update(string id);
+        void Update(Player player, string id);
 
         bool Remove(ObjectId id);
     }

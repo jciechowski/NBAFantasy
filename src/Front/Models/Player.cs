@@ -1,10 +1,12 @@
-﻿using MongoDB.Bson;
+﻿using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Front.Models
 {
-    public class Players
+    public class Player
     {
+        [ScaffoldColumn(false)]
         [BsonId]
         public ObjectId Id { get; set; }
         public string Position { get; set; }

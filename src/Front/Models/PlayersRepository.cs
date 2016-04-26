@@ -29,33 +29,34 @@ namespace Front.Models
             _collection = Database.GetCollection<BsonDocument>(collection);
         }
 
-        public void Add(Players player)
+        public void Add(Player player)
         {
             var document = BsonDocument.Parse(player.ToJson());
             _collection.InsertOne(document);
         }
 
-        public IEnumerable<Players> GetAllPlayers()
+        public IEnumerable<Player> GetAllPlayers()
         {
             var documents = _collection.Find(new BsonDocument()).ToList();
-            return documents.Select(bsonDocument => BsonSerializer.Deserialize<Players>(bsonDocument)).ToArray();
+            return documents.Select(bsonDocument => BsonSerializer.Deserialize<Player>(bsonDocument)).ToArray();
         }
 
-        public Players FindById(string id)
+        public Player FindById(string id)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _collection.Find(filter).FirstOrDefault();
-            return BsonSerializer.Deserialize<Players>(document);
+            return BsonSerializer.Deserialize<Player>(document);
         }
 
         public bool Remove(ObjectId id)
         {
             throw new NotImplementedException();
         }
-
-        public void Update(string id)
+        //TODO
+        // remove ID and fix passing player ID from Edit view
+        public void Update(Player player, string id)
         {
-            var player = FindById(id);
+            player.Id = ObjectId.Parse(id);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", player.Id);
             _collection.ReplaceOne(filter, BsonDocument.Parse(player.ToJson()));
         }
