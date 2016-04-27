@@ -3,6 +3,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NBAFantasy.Controllers;
 using NBAFantasy.Models;
 
 namespace NBAFantasy
@@ -26,7 +27,7 @@ namespace NBAFantasy
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; set; }
+        private IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,6 +36,7 @@ namespace NBAFantasy
 
             services.AddInstance<IConfiguration>(Configuration);
             services.AddSingleton<IPlayerRepository, PlayersRepository>();
+            services.AddSingleton<ITeamRepository, TeamRepository>();
 
             // Add application services.
         }
@@ -59,6 +61,9 @@ namespace NBAFantasy
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Players}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "Team",
+                    template: "{controller=Teams}/{action=Index}/{id?}");
             });
         }
 

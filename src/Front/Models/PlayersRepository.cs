@@ -36,7 +36,7 @@ namespace NBAFantasy.Models
         {
             var client = new MongoClient();
             var dbName = Options.GetSection("database").Value;
-            var collection = Options.GetSection("collection").Value;
+            var collection = Options.GetSection("playersCollection").Value;
             Database = client.GetDatabase(dbName);
             _collection = Database.GetCollection<BsonDocument>(collection);
         }

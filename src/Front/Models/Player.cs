@@ -6,7 +6,6 @@ namespace NBAFantasy.Models
 {
     public class Player
     {
-        [ScaffoldColumn(false)]
         [BsonId]
         public ObjectId Id { get; set; }
         public string Position { get; set; }
