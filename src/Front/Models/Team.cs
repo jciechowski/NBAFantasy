@@ -9,8 +9,9 @@ namespace NBAFantasy.Models
         [BsonId]
         public ObjectId Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Player> Players { get; set; }
         public string GM { get; set; }
-
+        // TODO
+        // serializer żeby zamiast ObjectId wyciągać Player
+        public IEnumerable<ObjectId> Players { get; set; }
     }
 }

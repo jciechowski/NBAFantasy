@@ -1,0 +1,31 @@
+﻿@using NBAFantasy.Models
+@model Team
+
+@{
+    ViewBag.Title = "Teams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Team details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.GM)
+        </th>
+        <th>
+            @Html.DisplayFor(model => model.Players)
+        </th>
+    </tr>
+    @*@foreach (var player in Model.Players)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => player.ToString())
+            </td>
+        </tr>
+    }*@
+</table>

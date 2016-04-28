@@ -60,9 +60,6 @@ namespace NBAFantasy
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Players}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "Team",
                     template: "{controller=Teams}/{action=Index}/{id?}");
             });
         }

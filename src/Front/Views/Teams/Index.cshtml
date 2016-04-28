@@ -28,6 +28,11 @@
             <td>
                 @Html.DisplayFor(model => team.GM)
             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@team.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@team.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@team.Id">Delete</a>
+            </td>
         </tr>
     }
 </table>
