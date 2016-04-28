@@ -15,17 +15,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th @Html.DisplayNameFor(model => model.Players)>
+        <th>
+            @Html.DisplayNameFor(model => model.GM)
         </th>
     </tr>
     @foreach (var team in Model)
     {
         <tr>
             <td>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayFor(model => team.Name)
             </td>
             <td>
-                @Html.DisplayNameFor(model => model.Players)
+                @Html.DisplayFor(model => team.GM)
             </td>
         </tr>
     }
