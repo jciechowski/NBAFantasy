@@ -16,16 +16,16 @@
         <th>
             @Html.DisplayFor(model => model.GM)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayFor(model => model.Players)
-        </th>
+        </th>*@
     </tr>
-    @*@foreach (var player in Model.Players)
+    @foreach (var player in Model.Players)
     {
         <tr>
             <td>
-                @Html.DisplayFor(model => player.ToString())
+                @Html.DisplayFor(model => player)
             </td>
         </tr>
-    }*@
+    }
 </table>
