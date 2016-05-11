@@ -1,0 +1,34 @@
+﻿@using NBAFantasy.Models
+@model Team
+
+@{
+    ViewData["Title"] = "Create Team";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.EditorForModel()
+    </p>
+    @*<p>
+        @Html.DropDownListFor(
+        team => team.Players,
+        Model.Players.Select(p => new SelectListItem
+        {
+            Text = p.Name,
+            Value = p.Name.ToString()
+
+        }),
+        "Pick ya playah"
+        )
+    </p>*@
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

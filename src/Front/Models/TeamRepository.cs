@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -12,6 +13,7 @@ namespace NBAFantasy.Models
         IEnumerable<Team> GetAllTeams();
         object FindById(string id);
         void Update(Team player, string id);
+        void Create(Team team);
     }
     public class TeamRepository : ITeamRepository
     {
@@ -28,7 +30,7 @@ namespace NBAFantasy.Models
         public IEnumerable<Team> GetAllTeams()
         {
             var documents = _collection.Find(new BsonDocument()).ToList();
-            return documents.Select(bsonDoc => BsonSerializer.Deserialize<Team>(bsonDoc)).ToArray();
+            return documents.Select(bsonDoc => BsonSerializer.Deserialize<Team>(bsonDoc)).ToList();
         }
 
         private void Connect()
@@ -52,6 +54,12 @@ namespace NBAFantasy.Models
             team.Id = ObjectId.Parse(id);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", team.Id);
             _collection.ReplaceOne(filter, BsonDocument.Parse(team.ToJson()));
+        }
+
+        public void Create(Team team)
+        {
+            var newTeam = BsonDocument.Parse(team.ToJson());
+            _collection.InsertOne(newTeam);
         }
     }
 }

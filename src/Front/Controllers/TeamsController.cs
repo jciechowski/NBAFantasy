@@ -48,5 +48,17 @@ namespace NBAFantasy.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Team team)
+        {
+            _teamRepository.Create(team);
+            return View();
+        }
     }
 }
