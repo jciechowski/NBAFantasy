@@ -14,5 +14,7 @@ namespace NBAFantasy.Models
         public string DOB { get; set; }
         public string Team { get; set; }
         public string Name { get; set; }
+        [BsonIgnore]
+        public bool Selected { get; set; }
     }
 }

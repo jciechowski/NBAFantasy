@@ -8,10 +8,12 @@ namespace NBAFantasy.Controllers
     public class TeamsController : Controller
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly IPlayerRepository _playerRepository;
 
-        public TeamsController(ITeamRepository teamRepository)
+        public TeamsController(ITeamRepository teamRepository, IPlayerRepository playerRepository)
         {
             _teamRepository = teamRepository;
+            _playerRepository = playerRepository;
         }
 
         public IActionResult Index()
@@ -62,6 +64,12 @@ namespace NBAFantasy.Controllers
             team.Players = new List<Player>();
             _teamRepository.Create(team);
             return RedirectToAction(("Index"));
+        }
+
+        public IActionResult AddPlayers()
+        {
+            var allPlayers = _playerRepository.GetAllPlayers();
+            return View(allPlayers);
         }
     }
 }
