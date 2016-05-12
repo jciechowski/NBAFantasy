@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Mvc;
 using NBAFantasy.Models;
 using System;
+using System.Collections.Generic;
 
 namespace NBAFantasy.Controllers
 {
@@ -46,7 +47,8 @@ namespace NBAFantasy.Controllers
 
         public IActionResult Delete(string id)
         {
-            throw new NotImplementedException();
+            _teamRepository.Delete(id);
+            return RedirectToAction(("Index"));
         }
 
         public IActionResult Create()
@@ -57,8 +59,9 @@ namespace NBAFantasy.Controllers
         [HttpPost]
         public IActionResult Create(Team team)
         {
+            team.Players = new List<Player>();
             _teamRepository.Create(team);
-            return View();
+            return RedirectToAction(("Index"));
         }
     }
 }

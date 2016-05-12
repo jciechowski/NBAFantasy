@@ -14,6 +14,7 @@ namespace NBAFantasy.Models
         object FindById(string id);
         void Update(Team player, string id);
         void Create(Team team);
+        void Delete(string id);
     }
     public class TeamRepository : ITeamRepository
     {
@@ -26,7 +27,6 @@ namespace NBAFantasy.Models
             Options = dbConfiguration.GetSection("DatabaseSettings");
             Connect();
         }
-
         public IEnumerable<Team> GetAllTeams()
         {
             var documents = _collection.Find(new BsonDocument()).ToList();
@@ -60,6 +60,12 @@ namespace NBAFantasy.Models
         {
             var newTeam = BsonDocument.Parse(team.ToJson());
             _collection.InsertOne(newTeam);
+        }
+
+        public void Delete(string id)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            _collection.DeleteOne(filter);
         }
     }
 }
