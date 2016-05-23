@@ -33,6 +33,8 @@ namespace NBAFantasy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddCaching();
+            services.AddSession();
 
             services.AddInstance<IConfiguration>(Configuration);
             services.AddSingleton<IPlayerRepository, PlayersRepository>();
@@ -53,6 +55,7 @@ namespace NBAFantasy
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             app.UseStaticFiles();
+            app.UseSession();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 

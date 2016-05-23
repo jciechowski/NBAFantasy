@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -11,19 +10,23 @@ namespace NBAFantasy.Models
     public interface ITeamRepository
     {
         IEnumerable<Team> GetAllTeams();
-        object FindById(string id);
+        Team FindById(string id);
         void Update(Team player, string id);
         void Create(Team team);
         void Delete(string id);
+        void AddPlayer(string playerId, string teamId);
     }
     public class TeamRepository : ITeamRepository
     {
         private IMongoCollection<BsonDocument> _collection;
+        private IPlayerRepository _playerRepository;
+
         private IMongoDatabase Database { get; set; }
         private IConfiguration Options { get; }
 
-        public TeamRepository(IConfiguration dbConfiguration)
+        public TeamRepository(IConfiguration dbConfiguration, IPlayerRepository playerRepository)
         {
+            _playerRepository = playerRepository;
             Options = dbConfiguration.GetSection("DatabaseSettings");
             Connect();
         }
@@ -42,7 +45,7 @@ namespace NBAFantasy.Models
             _collection = Database.GetCollection<BsonDocument>(collection);
         }
 
-        public object FindById(string id)
+        public Team FindById(string id)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _collection.Find(filter).FirstOrDefault();
@@ -66,6 +69,14 @@ namespace NBAFantasy.Models
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             _collection.DeleteOne(filter);
+        }
+
+        public void AddPlayer(string playerId, string teamId)
+        {
+            var player = _playerRepository.FindById(playerId);
+            var team = FindById(teamId);
+            var teamPlayers = team.Players;
+            //_collection.InsertOne(player);
         }
     }
 }

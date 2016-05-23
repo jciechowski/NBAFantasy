@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Mvc;
 using NBAFantasy.Models;
-using System;
 using System.Collections.Generic;
 
 namespace NBAFantasy.Controllers
@@ -43,6 +42,7 @@ namespace NBAFantasy.Controllers
 
         public IActionResult Details(string id)
         {
+            TempData["TeamId"] = id;
             var team = _teamRepository.FindById(id);
             return View(team);
         }
@@ -69,6 +69,17 @@ namespace NBAFantasy.Controllers
         public IActionResult AddPlayers()
         {
             var allPlayers = _playerRepository.GetAllPlayers();
+            return View(allPlayers);
+        }
+
+        [HttpPost]
+        public IActionResult AddPlayers(string[] selectedPlayers)
+        {
+            var players = new List<Player>();
+            foreach (var selectedPlayer in selectedPlayers)
+                players.Add(_playerRepository.FindById(selectedPlayer));
+            var allPlayers = _playerRepository.GetAllPlayers();
+            _teamRepository.AddPlayer(selectedPlayers[0], TempData["TeamId"].ToString());
             return View(allPlayers);
         }
     }

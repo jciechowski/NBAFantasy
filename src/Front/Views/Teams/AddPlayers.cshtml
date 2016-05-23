@@ -11,26 +11,16 @@
 <p>
     <a asp-action="AddPlayers">Add players</a>
 </p>
-<table class="table">
-    @using (Html.BeginForm())
+@using (Html.BeginForm())
+{
+    
+    @foreach (var player in Model)
     {
-        <tr>
-            <th>Selection</th>
-            <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Position)</th>
-            <th>@Html.DisplayNameFor(model => model.Team)</th>
-        </tr>
-        foreach (var player in Model)
-        {
-            <tr>
-                <td>@Html.CheckBoxFor(model => player.Selected)</td>
-                <td>@Html.DisplayFor(model => player.Name)</td>
-                <td>@Html.DisplayFor(model => player.Position)</td>
-                <td>@Html.DisplayFor(model => player.Team)</td>
-            </tr>
-        }
+        <label for="@player.Name">@player.Name</label>
+        <input type="checkbox" class="checkbox" name="selectedPlayers" value="@player.Id" />
     }
-</table>
-<p>
-    <input type="submit" value="Save" />
-</p>
+
+    <p>
+        <input type="submit" value="Save" />
+    </p>
+}
