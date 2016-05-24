@@ -14,7 +14,7 @@
 @using (Html.BeginForm())
 {
     
-    @foreach (var player in Model)
+    foreach (var player in Model)
     {
         <label for="@player.Name">@player.Name</label>
         <input type="checkbox" class="checkbox" name="selectedPlayers" value="@player.Id" />
