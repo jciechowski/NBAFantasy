@@ -24,7 +24,7 @@ namespace NBAFantasy.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var team = _dbRepository.FindById(id);
+            var team = _dbRepository.FindTeamById(id);
             if (team == null)
                 return HttpNotFound();
 
@@ -41,7 +41,7 @@ namespace NBAFantasy.Controllers
         public IActionResult Details(string id)
         {
             TempData["TeamId"] = id;
-            var team = _dbRepository.FindById(id);
+            var team = _dbRepository.FindTeamById(id);
             return View(team);
         }
 

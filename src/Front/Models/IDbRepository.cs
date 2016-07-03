@@ -11,18 +11,14 @@ namespace NBAFantasy.Models
     {
 
         IEnumerable<Team> GetAllTeams();
-        Team FindById(string id);
+        Team FindTeamById(string id);
+        Player FindPlayerById(string id);
         void Update(Team team, string id);
         void Create(Team team);
         void Delete(string id);
         void AddPlayer(string playerId, string teamId);
 
         IEnumerable<Player> GetAllPlayers();
-        
-        // TODO
-        // Generyk dla FindById ?
-        // <T> FindById(string id);
-        //Player FindById(string name);
 
         void Create(Player player);
 
@@ -61,12 +57,21 @@ namespace NBAFantasy.Models
             return documents.Select(bsonDoc => BsonSerializer.Deserialize<Team>(bsonDoc)).ToList();
         }
 
-        public Team FindById(string id)
+        public Team FindTeamById(string id)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _teamCollection.Find(filter).FirstOrDefault();
             return BsonSerializer.Deserialize<Team>(document);
         }
+
+        public Player FindPlayerById(string id)
+        {
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
+            var document = _playerCollection.Find(filter).FirstOrDefault();
+            return BsonSerializer.Deserialize<Player>(document);
+        }
+
 
         public void Update(Team team, string id)
         {

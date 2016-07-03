@@ -23,7 +23,7 @@ namespace NBAFantasy.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var player = _dbRepository.FindById(id);
+            var player = _dbRepository.FindPlayerById(id);
             if (player == null)
                 return HttpNotFound();
 
