@@ -37,8 +37,7 @@ namespace NBAFantasy
             services.AddSession();
 
             services.AddInstance<IConfiguration>(Configuration);
-            services.AddSingleton<IPlayerRepository, PlayersRepository>();
-            services.AddSingleton<ITeamRepository, TeamRepository>();
+            services.AddSingleton<IDbRepository, DbRepository>();
 
             // Add application services.
         }

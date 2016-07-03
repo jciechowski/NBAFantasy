@@ -5,16 +5,16 @@ namespace NBAFantasy.Controllers
 {
     public class PlayersController : Controller
     {
-        private readonly IPlayerRepository _playerRepository;
+        private readonly IDbRepository _dbRepository;
 
-        public PlayersController(IPlayerRepository playerRepository)
+        public PlayersController(IDbRepository dbRepository)
         {
-            _playerRepository = playerRepository;
+            _dbRepository = dbRepository;
         }
 
         public IActionResult Index()
         {
-            var allPlayers = _playerRepository.GetAllPlayers();
+            var allPlayers = _dbRepository.GetAllPlayers();
             return View(allPlayers);
         }
 
@@ -23,7 +23,7 @@ namespace NBAFantasy.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var player = _playerRepository.FindById(id);
+            var player = _dbRepository.FindById(id);
             if (player == null)
                 return HttpNotFound();
 
@@ -33,13 +33,13 @@ namespace NBAFantasy.Controllers
         [HttpPost]
         public IActionResult Edit(Player player, string id)
         {
-            _playerRepository.Update(player, id);
+            _dbRepository.Update(player, id);
             return View(player);
         }
 
         public IActionResult Delete(string id)
         {
-            _playerRepository.Remove(id);
+            _dbRepository.Remove(id);
             return RedirectToAction(("Index"));
         }
 
@@ -53,7 +53,7 @@ namespace NBAFantasy.Controllers
         {
             if (player == null)
                 return HttpNotFound();
-            _playerRepository.Create(player);
+            _dbRepository.Create(player);
             return View();
         }
     }
