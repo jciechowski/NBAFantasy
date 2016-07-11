@@ -11,6 +11,10 @@ var paths = {
     webroot: "./wwwroot/"
 };
 
+var angularItemsToCopy = {
+    './node_modules/angular/angular*.js': paths.webroot + "lib"
+};
+
 paths.js = paths.webroot + "js/**/*.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
 paths.css = paths.webroot + "css/**/*.css";
@@ -43,3 +47,12 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task("copy",
+    function() {
+        for (var src in angularItemsToCopy) {
+            if (!angularItemsToCopy.hasOwnProperty(src)) continue;
+            gulp.src(src)
+                .pipe(gulp.dest(angularItemsToCopy[src]));
+        }
+    });

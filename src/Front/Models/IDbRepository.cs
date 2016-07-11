@@ -61,12 +61,13 @@ namespace NBAFantasy.Models
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _teamCollection.Find(filter).FirstOrDefault();
-            return BsonSerializer.Deserialize<Team>(document);
+            var team = BsonSerializer.Deserialize<Team>(document);
+            team.Players = new List<Player>();
+            return team;
         }
 
         public Player FindPlayerById(string id)
         {
-
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _playerCollection.Find(filter).FirstOrDefault();
             return BsonSerializer.Deserialize<Player>(document);
