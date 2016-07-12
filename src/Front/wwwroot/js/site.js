@@ -1,10 +1,16 @@
-﻿var myApp = angular.module('myModule', []).run(function() {
-    console.log("hello from teams list");
+﻿var teamApp = angular.module('teamModule', []);
+
+teamApp.controller('teamController', function ($scope) {
+    $scope.init = function (teams) {
+        $scope.teams = teams;
+    };
 });
 
-myApp.controller('myController', function ($scope) {
-    $scope.init = function (teams) {
-        console.log(teams);
-        $scope.teams = teams;
-    }
+var playerApp = angular.module('playerModule', []);
+
+playerApp.controller('playerController',
+    function ($scope) {
+        $scope.init = function (players) {
+            $scope.players = players;
+        };
 });
