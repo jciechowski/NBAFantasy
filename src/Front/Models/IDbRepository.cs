@@ -41,7 +41,7 @@ namespace NBAFantasy.Models
         }
         private void Connect()
         {
-            var client = new MongoClient();
+            var client = new MongoClient(Options.GetSection("connectionString").Value);
             Database = client.GetDatabase(Options.GetSection("database").Value);
 
             var playerCollection = Options.GetSection("playersCollection").Value;
