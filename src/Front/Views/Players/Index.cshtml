@@ -16,6 +16,7 @@
 
 <div ng-app="nbaFantasy">
     <div ng-controller="playerController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        Filter by team: <input ng-model="searchTeam"/>
         <table class="table">
             <tr>
                 <th>
@@ -40,7 +41,7 @@
                     @Html.DisplayNameFor(model => model.Team)
                 </th>
             </tr>
-            <tr ng-repeat="player in players">
+            <tr ng-repeat="player in players | filter:searchTeam">
                 <td>
                     {{player.Name}}
                 </td>
