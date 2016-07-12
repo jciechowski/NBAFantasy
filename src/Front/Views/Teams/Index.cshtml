@@ -5,34 +5,29 @@
     ViewBag.Title = "Teams";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div ng-app="myModule">
 
-<h2>Team</h2>
-<p>
-    <a asp-action="Create">Create new</a>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GM)
-        </th>
-    </tr>
-    @foreach (var team in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => team.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(model => team.GM)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@team.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@team.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@team.Id">Delete</a>
-            </td>
-        </tr>
-    }
-</table>
+    <h2>Team</h2>
+    <p>
+        <a asp-action="Create">Create new</a>
+    </p>
+    <div ng-controller="myController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
+        <table>
+            <tr>
+                <th>Team name</th>
+                <th>GM</th>
+            </tr>
+            <tr ng-repeat="team in teams">
+                <td>
+                    {{team.Name}}
+                </td>
+                <td>
+                    {{team.GM}}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+@*<a asp-action="Edit" asp-route-id="team.Id">Edit</a>*@
+@*<a asp-action="Details" asp-route-id="team.Id">Details</a>*@
+@*<a asp-action="Delete" asp-route-id="team.Id">Delete</a>*@
