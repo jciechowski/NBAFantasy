@@ -6,13 +6,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/js/controllers/player.js"></script>
+
 <h2>List Players</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
 
-<div ng-app="playerModule">
+<div ng-app="nbaFantasy">
     <div ng-controller="playerController" data-ng-init="init(@Newtonsoft.Json.JsonConvert.SerializeObject(Model))">
         <table class="table">
             <tr>
@@ -49,7 +51,7 @@
                     {{player.DOB}}
                 </td>
                 <td>
-                    {{player.Number}}
+                    #{{player.Number}}
                 </td>
                 <td>
                     {{player.Height}}
