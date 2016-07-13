@@ -62,7 +62,6 @@ namespace NBAFantasy.Models
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             var document = _teamCollection.Find(filter).FirstOrDefault();
             var team = BsonSerializer.Deserialize<Team>(document);
-            team.Players = new List<Player>();
             return team;
         }
 

@@ -59,7 +59,6 @@ namespace NBAFantasy.Controllers
         [HttpPost]
         public IActionResult Create(Team team)
         {
-            team.Players = new List<Player>();
             _dbRepository.Create(team);
             return RedirectToAction(("Index"));
         }
