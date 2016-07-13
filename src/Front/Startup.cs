@@ -3,7 +3,6 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NBAFantasy.Controllers;
 using NBAFantasy.Models;
 
 namespace NBAFantasy

@@ -36,7 +36,7 @@
   },
 
   "frameworks": {
-    "dnx451": { }
+    "dnx451": {}
   },
 
   "exclude": [
@@ -49,5 +49,10 @@
   ],
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
+  },
+  "tools": {
+    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+    "Microsoft.Extensions.SecretManager.Tools": "1.0.0-preview2-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-final"
   }
 }
