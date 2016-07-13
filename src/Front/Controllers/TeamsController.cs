@@ -42,6 +42,7 @@ namespace NBAFantasy.Controllers
         {
             TempData["TeamId"] = id;
             var team = _dbRepository.FindTeamById(id);
+            team.Players = _dbRepository.FindPlayerByTeamId(id);
             return View(team);
         }
 

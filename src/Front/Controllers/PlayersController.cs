@@ -58,7 +58,7 @@ namespace NBAFantasy.Controllers
             if (player == null)
                 return HttpNotFound();
             _dbRepository.Create(player);
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

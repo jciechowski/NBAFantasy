@@ -20,7 +20,8 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
-                </th><th>
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.GM)
                 </th>
             </tr>
@@ -31,6 +32,7 @@
                 <td>
                     {{team.GM}}
                 </td>
+
                 <td>
                     <a class="glyphicon glyphicon-edit" data-ng-href="@Url.Action("Edit", "Teams")/{{team.Id}}">Edit</a>
                     <a class="glyphicon glyphicon-expand" data-ng-href="@Url.Action("Details", "Teams")/{{team.Id}}">Details</a>

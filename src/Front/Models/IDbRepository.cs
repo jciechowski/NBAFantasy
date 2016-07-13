@@ -25,6 +25,7 @@ namespace NBAFantasy.Models
         void Update(Player player, string id);
 
         void Remove(string id);
+        IEnumerable<Player> FindPlayerByTeamId(string teamId);
     }
 
     public class DbRepository : IDbRepository
@@ -75,7 +76,6 @@ namespace NBAFantasy.Models
 
         public void Update(Team team, string id)
         {
-
             team.Id = ObjectId.Parse(id);
             var filter = Builders<BsonDocument>.Filter.Eq("_id", team.Id);
             _teamCollection.ReplaceOne(filter, BsonDocument.Parse(team.ToJson()));
@@ -101,7 +101,7 @@ namespace NBAFantasy.Models
         public IEnumerable<Player> GetAllPlayers()
         {
             var documents = _playerCollection.Find(new BsonDocument()).ToList();
-            return documents.Select(bsonDocument => BsonSerializer.Deserialize<Player>(bsonDocument)).ToArray();
+            return documents.Select(bsonDocument => BsonSerializer.Deserialize<Player>(bsonDocument)).ToList();
         }
 
         public void Create(Player player)
@@ -123,6 +123,13 @@ namespace NBAFantasy.Models
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
             _playerCollection.DeleteOne(filter);
+        }
+
+        public IEnumerable<Player> FindPlayerByTeamId(string teamId)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("TeamId", teamId);
+            var documents = _playerCollection.Find(filter).ToList();
+            return documents.Select(bsonDocument => BsonSerializer.Deserialize<Player>(bsonDocument)).ToList();
         }
     }
 }
