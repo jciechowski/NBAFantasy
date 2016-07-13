@@ -14,8 +14,12 @@ namespace NBAFantasy.Controllers
 
         public IActionResult Index()
         {
-            var allPlayers = _dbRepository.GetAllPlayers();
-            return View(allPlayers);
+            var players = _dbRepository.GetAllPlayers();
+            foreach (var player in players)
+            {
+                player.Team = _dbRepository.FindTeamById(player.TeamId.ToString());
+            }
+            return View(players);
         }
 
         public IActionResult Edit(string id)

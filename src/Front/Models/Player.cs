@@ -12,7 +12,9 @@ namespace NBAFantasy.Models
         public string Height { get; set; }
         public string Weight { get; set; }
         public string DOB { get; set; }
-        public ObjectId Team { get; set; }
+        public ObjectId TeamId { get; set; }
+        [BsonIgnore]
+        public Team Team { get; set; }
         public string Name { get; set; }
     }
 }
