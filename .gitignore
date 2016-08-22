@@ -252,7 +252,7 @@ paket-files/
 *.sln.iml
 
 # jspm
-jspm_packages/*/*
+**/*jspm_packages/*/*
 jspm
 build.js
 build.js.map
