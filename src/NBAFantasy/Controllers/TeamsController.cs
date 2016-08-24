@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NBAFantasy.Models;
-using System.Collections.Generic;
 
 namespace NBAFantasy.Controllers
 {
