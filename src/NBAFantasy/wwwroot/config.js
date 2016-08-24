@@ -2,19 +2,19 @@ System.config({
   baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "babel",
-  stage: 0,
   babelOptions: {
-      "optional": [
-        "runtime",
-        "optimisation.modules.system",
-        "es7.decorators",
-        "es7.classProperties"
-      ]
+    "optional": [
+      "runtime",
+      "optimisation.modules.system",
+      "es7.decorators",
+      "es7.classProperties"
+    ]
   },
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+  stage: 0,
 
   map: {
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0",
