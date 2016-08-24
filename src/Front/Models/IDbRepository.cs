@@ -9,7 +9,6 @@ namespace NBAFantasy.Models
 {
     public interface IDbRepository
     {
-
         IEnumerable<Team> GetAllTeams();
         Team FindTeamById(string id);
         Player FindPlayerById(string id);
@@ -17,13 +16,9 @@ namespace NBAFantasy.Models
         void Create(Team team);
         void Delete(string id);
         void AddPlayer(string playerId, string teamId);
-
         IEnumerable<Player> GetAllPlayers();
-
         void Create(Player player);
-
         void Update(Player player, string id);
-
         void Remove(string id);
         IEnumerable<Player> FindPlayerByTeamId(string teamId);
     }
@@ -61,7 +56,7 @@ namespace NBAFantasy.Models
         public Team FindTeamById(string id)
         {
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ObjectId.Parse(id));
-            var document = _teamCollection.Find(filter).FirstOrDefault();
+            var document = _teamCollection.Find(filter).FirstOrDefault() ?? new BsonDocument();
             var team = BsonSerializer.Deserialize<Team>(document);
             return team;
         }
@@ -112,6 +107,7 @@ namespace NBAFantasy.Models
 
         //TODO
         // remove ID and fix passing player ID from Edit view
+        // pass TeamId
         public void Update(Player player, string id)
         {
             player.Id = ObjectId.Parse(id);
