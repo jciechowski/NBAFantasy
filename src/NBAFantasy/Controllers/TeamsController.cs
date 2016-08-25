@@ -12,10 +12,17 @@ namespace NBAFantasy.Controllers
             _dbRepository = dbRepository;
         }
 
+        [Route("")]
+        public IActionResult Host()
+        {
+            return View();
+        }
+
+        [Route("index")]
         public IActionResult Index()
         {
             var allTeams = _dbRepository.GetAllTeams();
-            return View(allTeams);
+            return PartialView(allTeams);
         }
 
         public IActionResult Edit(string id)
